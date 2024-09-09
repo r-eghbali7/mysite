@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'website.apps.WebsiteConfig'
+    'website.apps.WebsiteConfig',
+    'blog'
 ]
 
 MIDDLEWARE = [
@@ -118,8 +119,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = "/Users/emar/Documents/GitHub/mysite/website/static"
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = "/Users/emar/Documents/GitHub/mysite/website/media"
+
 STATICFILES_DIRS = [
-    BASE_DIR / "statics"
+    BASE_DIR / "static"
 ]
 
 # Default primary key field type
