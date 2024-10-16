@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from blog.models import post
 from django.utils import timezone
 
@@ -7,19 +7,16 @@ from django.utils import timezone
 def blog_view(request):
     posts = post.objects.filter(published_date__lt = timezone.now())
     context = {'posts': posts}
-    for post_ in posts:
-       post_.counted_views += 1
-       post_.save()
     return render(request, './blog/blog-home.html',context)
 
-def blog_single(request):
-    posts = post.objects.filter(published_date__lt = timezone.now())
-    context = {'posts': posts}
-    #post.counted_views += 1
+def blog_single(request, pid):
+    Post = get_object_or_404(post, pk=pid, status = 1)
+    context = {'Post':Post, 'pid':pid}
+    Post.counted_views += 1
+    Post.save()
+
     return render(request, './blog/blog-single.html', context)
 
-def test(request):
-    Post = post.objects.filter(published_date__lt= timezone.now())
-    #Post = post.objects.all()
-    context = {'Post' : Post}
+def test(request, pid):
+    context = {'pid':pid}
     return render(request, 'test.html', context)
